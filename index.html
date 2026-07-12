@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shengyu Li — Systems, AI & Risk</title>
+<meta name="description" content="Shengyu Li (KCNyu) — Linux kernel contributor, MSU system-programming grad, building multi-agent LLM systems and risk-aware quant tooling.">
+<meta name="author" content="Shengyu Li">
+<link rel="canonical" href="https://kcnyu.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%A7%3C/text%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shengyu Li — Systems, AI & Risk">
+<meta property="og:description" content="Linux kernel contributor · MSU system programming · building multi-agent LLM & risk-aware quant tooling.">
+<meta property="og:url" content="https://kcnyu.github.io/">
+<meta property="og:image" content="https://kcnyu.github.io/avatar.jpg">
+<meta name="twitter:card" content="summary">
+
+<style>
+:root{
+  --bg:#0b0c0f; --bg-soft:#111318; --surface:#14171d; --surface-2:#191d25;
+  --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.16);
+  --ink:#e9eaee; --ink-soft:#b7bcc6; --muted:#868d99;
+  --accent:#5eead4; --accent-ink:#0b0c0f; --accent-soft:rgba(94,234,212,.14);
+  --amber:#f5c26b;
+  --radius:16px; --maxw:960px;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Noto Sans CJK SC",sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#f7f7f4; --bg-soft:#eeeeea; --surface:#ffffff; --surface-2:#f3f3ef;
+  --line:rgba(15,17,21,.10); --line-strong:rgba(15,17,21,.18);
+  --ink:#16181d; --ink-soft:#3c4149; --muted:#6a717c;
+  --accent:#0d9488; --accent-ink:#ffffff; --accent-soft:rgba(13,148,136,.12);
+  --amber:#b06a00;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme]){
+    --bg:#f7f7f4; --bg-soft:#eeeeea; --surface:#ffffff; --surface-2:#f3f3ef;
+    --line:rgba(15,17,21,.10); --line-strong:rgba(15,17,21,.18);
+    --ink:#16181d; --ink-soft:#3c4149; --muted:#6a717c;
+    --accent:#0d9488; --accent-ink:#ffffff; --accent-soft:rgba(13,148,136,.12);
+    --amber:#b06a00;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(60rem 40rem at 78% -8%, var(--accent-soft), transparent 60%),
+    radial-gradient(48rem 32rem at -6% 6%, rgba(245,194,107,.06), transparent 55%);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.mono{font-family:var(--mono)}
+.kicker{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); display:inline-flex; align-items:center; gap:.5rem; margin:0 0 .9rem;
+}
+.kicker::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.7}
+
+/* ---- top nav ---- */
+nav{
+  position:sticky; top:0; z-index:20;
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  background:color-mix(in srgb, var(--bg) 72%, transparent);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:14px}
+.brand{font-family:var(--mono);font-weight:600;font-size:.92rem;letter-spacing:.02em;display:flex;align-items:center;gap:.55rem}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  font-family:var(--mono);font-size:.82rem;color:var(--ink-soft);
+  padding:.4rem .6rem;border-radius:9px;transition:color .15s,background .15s;
+}
+.nav-links a:hover{color:var(--ink);background:var(--surface)}
+.theme-btn{
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  width:34px;height:34px;border-radius:10px;cursor:pointer;display:grid;place-items:center;
+  transition:color .15s,border-color .15s;
+}
+.theme-btn:hover{color:var(--ink);border-color:var(--line-strong)}
+.theme-btn svg{width:16px;height:16px}
+.nav-links a.hide-sm{}
+@media (max-width:600px){.nav-links a.hide-sm{display:none}}
+
+/* ---- hero ---- */
+header.hero{padding:64px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.hero h1{
+  font-size:clamp(2.1rem,6vw,3.4rem); line-height:1.05; margin:.2rem 0 .5rem;
+  letter-spacing:-.02em; font-weight:700;
+}
+.hero h1 .cn{font-size:.42em;color:var(--muted);font-weight:500;letter-spacing:.05em;vertical-align:middle;margin-left:.55em}
+.role{font-size:1.06rem;color:var(--ink-soft);margin:0 0 1.15rem;max-width:34ch}
+.role b{color:var(--ink);font-weight:600}
+.quote{
+  font-family:var(--mono); font-size:.86rem; color:var(--muted);
+  border-left:2px solid var(--accent); padding:.15rem 0 .15rem .85rem; margin:0 0 1.5rem;
+}
+.avatar-wrap{position:relative;flex:0 0 auto}
+.avatar{
+  width:158px;height:158px;border-radius:22px;object-fit:cover;
+  border:1px solid var(--line-strong);
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.6), 0 0 0 1px var(--line);
+}
+.avatar-badge{
+  position:absolute;left:-12px;bottom:-12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);
+  padding:.38rem .55rem;display:flex;align-items:center;gap:.4rem;
+  box-shadow:0 10px 26px -14px rgba(0,0,0,.5);
+}
+.avatar-badge b{color:var(--ink)}
+.avatar-badge .pulse{width:7px;height:7px;border-radius:50%;background:#3fb950;box-shadow:0 0 0 3px rgba(63,185,80,.22)}
+
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.9rem;font-weight:500;padding:.6rem .95rem;border-radius:11px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  transition:transform .12s,border-color .15s,background .15s;
+}
+.btn svg{width:16px;height:16px}
+.btn:hover{transform:translateY(-2px);border-color:var(--line-strong)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:600}
+.btn.primary:hover{filter:brightness(1.05)}
+
+@media (max-width:720px){
+  header.hero{padding:40px 0 30px}
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+  .avatar-wrap{order:-1}
+  .avatar{width:104px;height:104px;border-radius:18px}
+  .avatar-badge{font-size:.64rem}
+}
+
+/* ---- stat strip ---- */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;margin:8px 0 4px;
+}
+.stat{background:var(--surface);padding:16px 18px}
+.stat .n{font-family:var(--mono);font-size:1.35rem;font-weight:600;letter-spacing:-.01em}
+.stat .n .u{color:var(--accent);font-size:.8em}
+.stat .l{font-size:.74rem;color:var(--muted);margin-top:2px;letter-spacing:.02em}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ---- sections ---- */
+section{padding:46px 0}
+section > .wrap > h2{
+  font-size:1.45rem;letter-spacing:-.01em;margin:0 0 4px;font-weight:650;
+}
+.sub{color:var(--muted);font-size:.94rem;margin:0 0 26px}
+
+/* highlight callout */
+.callout{
+  display:flex;gap:16px;align-items:flex-start;
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;
+  position:relative;overflow:hidden;
+}
+.callout::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber)}
+.callout .ico{font-size:1.7rem;line-height:1;flex:0 0 auto;margin-top:2px}
+.callout h3{margin:0 0 .3rem;font-size:1.02rem}
+.callout p{margin:0;color:var(--ink-soft);font-size:.92rem}
+.callout code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);padding:.08em .38em;border-radius:6px;border:1px solid var(--line)}
+.callout a.inl{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
+.callout a.inl:hover{border-color:var(--accent)}
+
+/* projects */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:680px){.grid{grid-template-columns:1fr}}
+.card{
+  display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 20px 18px;transition:transform .14s,border-color .15s,background .15s;
+  position:relative;min-height:100%;
+}
+.card:hover{transform:translateY(-3px);border-color:var(--line-strong);background:var(--surface-2)}
+.card.feature{grid-column:1 / -1;border-color:var(--line-strong)}
+.card.feature::after{
+  content:"";position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;
+  box-shadow:inset 0 0 0 1px var(--accent-soft);
+}
+.card .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:.6rem}
+.card h3{margin:0;font-size:1.05rem;font-family:var(--mono);font-weight:600;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.card .lang{font-family:var(--mono);font-size:.7rem;color:var(--muted);display:inline-flex;align-items:center;gap:.35rem}
+.card .lang .swatch{width:9px;height:9px;border-radius:50%}
+.card p{margin:0 0 .9rem;color:var(--ink-soft);font-size:.92rem;flex:1}
+.card .foot{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.card .foot .star{color:var(--amber)}
+.card .foot .go{margin-left:auto;color:var(--accent);display:inline-flex;align-items:center;gap:.3rem}
+.card .foot .go svg{width:13px;height:13px}
+.tag{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-soft);padding:.16rem .5rem;border-radius:999px;
+}
+
+/* two-col path */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:680px){.paths{grid-template-columns:1fr;gap:8px}}
+.path h3{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+.tl{position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.item{position:relative;padding:0 0 20px}
+.item:last-child{padding-bottom:0}
+.item::before{
+  content:"";position:absolute;left:-21px;top:6px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--line-strong);
+}
+.item.now::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.item .yr{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.item .ti{font-weight:600;font-size:.98rem;margin:.1rem 0 .1rem}
+.item .de{color:var(--ink-soft);font-size:.88rem}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
+.foot-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px}
+.foot-links a{
+  font-family:var(--mono);font-size:.82rem;color:var(--ink-soft);
+  border:1px solid var(--line);padding:.42rem .7rem;border-radius:10px;
+  display:inline-flex;align-items:center;gap:.45rem;transition:color .15s,border-color .15s;
+}
+.foot-links a:hover{color:var(--ink);border-color:var(--line-strong)}
+.foot-links a svg{width:15px;height:15px}
+.colophon{font-family:var(--mono);font-size:.72rem;color:var(--muted);line-height:1.7}
+.colophon a{color:var(--ink-soft);border-bottom:1px solid var(--line)}
+
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>shengyu.li</a>
+    <div class="nav-links">
+      <a href="#work" class="hide-sm">work</a>
+      <a href="#path" class="hide-sm">path</a>
+      <a href="https://github.com/KCNyu" target="_blank" rel="noopener">github</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<span id="top"></span>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Systems · AI · Risk</p>
+      <h1>Shengyu Li<span class="cn">李晟宇</span></h1>
+      <p class="role">
+        Kernel-level systems engineer turned <b>AI &amp; risk-control builder</b>.
+        MSU system-programming grad — now shipping multi-agent LLM systems and
+        risk-aware quant tooling that grades its own decisions.
+      </p>
+      <p class="quote">"Everything real turns fake, everything right is wrong."</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/KCNyu" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.9 2.9 1.4.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="mailto:shengyu.li.evgeny@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          Email
+        </a>
+        <a class="btn" href="https://www.zhihu.com/people/shengyuli" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M6.5 6c0 6-1 9-3 12M8 12h5M13 6v12M14 9h6M17.5 9v9l-2.5-2M19.5 9l1 9"/></svg>
+          知乎
+        </a>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <img class="avatar" src="avatar.jpg" width="158" height="158" alt="Shengyu Li">
+      <span class="avatar-badge"><span class="pulse"></span>based in <b>Moscow ↔ CN</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="n">6.9</div><div class="l">Linux kernel merged</div></div>
+    <div class="stat"><div class="n">180<span class="u">★</span></div><div class="l">GitHub stars</div></div>
+    <div class="stat"><div class="n">1.9<span class="u">k</span></div><div class="l">知乎 followers</div></div>
+    <div class="stat"><div class="n">MSU</div><div class="l">M.S. System Prog.</div></div>
+  </div>
+</div>
+
+<section id="highlight">
+  <div class="wrap">
+    <div class="callout">
+      <div class="ico">🐧</div>
+      <div>
+        <h3>Linux kernel contributor</h3>
+        <p>
+          Authored a patch merged into the mainline tree <b>(Linux 6.9)</b> that fixes an
+          infinite loop in the <code>selftests/harness</code> <code>FIXTURE_TEARDOWN</code> path —
+          <a class="inl" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=72d7cb5c190befbb095bae7737e71560ec0fcaa6" target="_blank" rel="noopener">torvalds/linux&nbsp;·&nbsp;72d7cb5</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <p class="kicker">Selected work</p>
+    <h2>Things I&#39;ve built</h2>
+    <p class="sub">From SQLite-from-scratch to autonomous LLM traders. Full list on GitHub.</p>
+    <div class="grid">
+
+      <a class="card feature" href="https://github.com/KCNyu/clawock" target="_blank" rel="noopener">
+        <div class="top">
+          <h3>clawock <span class="tag">flagship · live</span></h3>
+          <span class="lang"><span class="swatch" style="background:#3572A5"></span>Python</span>
+        </div>
+        <p>
+          A fully autonomous, multi-agent LLM system that runs a bull-vs-bear debate over a
+          real HK + US stock portfolio every morning, enforces hard risk gates, and grades its
+          own calls on a daily scorecard — honestly admitting where it loses to buy-and-hold.
+          Ships a live public dashboard.
+        </p>
+        <div class="foot">
+          <span class="star">★ 5</span>
+          <span>Multi-agent · Risk gates · Self-audit</span>
+          <span class="go">live dashboard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/KCNyu/db_tutorial_cpp" target="_blank" rel="noopener">
+        <div class="top">
+          <h3>db_tutorial_cpp</h3>
+          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
+        </div>
+        <p>Writing a SQLite clone from scratch in C++ — B-tree pager, cursor, and REPL. The most-starred thing I&#39;ve shared.</p>
+        <div class="foot"><span class="star">★ 133</span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a>
+
+      <a class="card" href="https://github.com/KCNyu/Program-MSU" target="_blank" rel="noopener">
+        <div class="top">
+          <h3>Program-MSU</h3>
+          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
+        </div>
+        <p>A course guide for the CS track at MSU-BIT / MSU Department of System Programming — the resource I wish I&#39;d had as a freshman.</p>
+        <div class="foot"><span class="star">★ 28</span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a>
+
+      <a class="card" href="https://github.com/KCNyu/HttpWebServer" target="_blank" rel="noopener">
+        <div class="top">
+          <h3>HttpWebServer</h3>
+          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
+        </div>
+        <p>An epoll-based, multiplexed HTTP file server — a hands-on study of high-concurrency Linux I/O.</p>
+        <div class="foot"><span class="star">★ 4</span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a>
+
+      <a class="card" href="https://github.com/KCNyu/SmPL-Supporter" target="_blank" rel="noopener">
+        <div class="top">
+          <h3>SmPL-Supporter</h3>
+          <span class="lang"><span class="swatch" style="background:#555"></span>C · VS Code</span>
+        </div>
+        <p>A VS Code extension providing rich language support for SmPL — the semantic-patch language behind Coccinelle &amp; CIL.</p>
+        <div class="foot"><span>Editor tooling</span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="path">
+  <div class="wrap">
+    <p class="kicker">Trajectory</p>
+    <h2>Where I&#39;ve been</h2>
+    <p class="sub">Systems &amp; compilers foundation → product-minded AI and risk work.</p>
+    <div class="paths">
+      <div class="path">
+        <h3>Experience</h3>
+        <div class="tl">
+          <div class="item now">
+            <div class="yr">2024 — now</div>
+            <div class="ti">AI &amp; Risk-Control · builder</div>
+            <div class="de">Multi-agent LLM systems and risk-aware quant tooling; product thinking around trust, guardrails and honest evaluation.</div>
+          </div>
+          <div class="item">
+            <div class="yr">2021 — 2023</div>
+            <div class="ti">Backend Developer</div>
+            <div class="de">Real-time backend services at scale.</div>
+          </div>
+          <div class="item">
+            <div class="yr">2021</div>
+            <div class="ti">Software Engineering Intern</div>
+            <div class="de">Backend development and systems work.</div>
+          </div>
+        </div>
+      </div>
+      <div class="path">
+        <h3>Education</h3>
+        <div class="tl">
+          <div class="item">
+            <div class="yr">2022 — 2024</div>
+            <div class="ti">M.S. — Lomonosov Moscow State University</div>
+            <div class="de">Department of System Programming (ВМК). Compilers, kernels, and program analysis.</div>
+          </div>
+          <div class="item">
+            <div class="yr">2018 — 2022</div>
+            <div class="ti">B.S. — Computational Mathematics &amp; Cybernetics</div>
+            <div class="de">MSU / MSU-BIT Shenzhen. Foundations in math, algorithms and systems.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="colophon">
+      © <span id="yr">2026</span> Shengyu Li · KCNyu<br>
+      Hand-built static page — no trackers, no frameworks.<br>
+      <a href="mailto:shengyu.li.evgeny@gmail.com">shengyu.li.evgeny@gmail.com</a>
+    </div>
+    <div class="foot-links">
+      <a href="https://github.com/KCNyu" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.9 2.9 1.4.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.zhihu.com/people/shengyuli" target="_blank" rel="noopener">知乎</a>
+      <a href="https://kcnyu.github.io/clawock/" target="_blank" rel="noopener">clawock ↗</a>
+      <a href="mailto:shengyu.li.evgeny@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  var sun='<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>';
+  var moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>';
+  function apply(t){
+    root.setAttribute('data-theme',t);
+    document.getElementById('themeIco').innerHTML = t==='dark' ? sun : moon;
+    try{localStorage.setItem('theme',t);}catch(e){}
+  }
+  var saved; try{saved=localStorage.getItem('theme');}catch(e){}
+  apply(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  btn.addEventListener('click',function(){
+    apply(root.getAttribute('data-theme')==='dark'?'light':'dark');
+  });
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
