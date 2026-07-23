@@ -1,0 +1,11 @@
+# robots.txt is fetched per origin, and this is the origin root, so this file is
+# the only robots.txt any crawler will ever read for kcnyu.github.io. A
+# robots.txt living inside a project path (e.g. /clawock/robots.txt) is never
+# requested — which is why the clawock sitemap has been undiscoverable from
+# robots since the site went up.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://kcnyu.github.io/sitemap.xml
+Sitemap: https://kcnyu.github.io/clawock/sitemap.xml
