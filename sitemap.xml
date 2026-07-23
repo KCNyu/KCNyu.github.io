@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The clawock project site keeps its own generated sitemap at
+     /clawock/sitemap.xml; both are declared in /robots.txt. lastmod is omitted
+     on purpose rather than hardcoded to a date that would silently go stale. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kcnyu.github.io/</loc>
+  </url>
+</urlset>
