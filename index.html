@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shengyu Li — Systems, AI & Risk</title>
-<meta name="description" content="Shengyu Li (KCNyu) — Linux kernel contributor, MSU system-programming grad, building multi-agent LLM systems and risk-aware quant tooling.">
+<meta name="description" content="Shengyu Li (KCNyu) — Linux kernel contributor and MSU system-programming grad, with a background in systems programming and independent AI and risk projects.">
 <meta name="author" content="Shengyu Li">
 <link rel="canonical" href="https://kcnyu.github.io/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%A7%3C/text%3E%3C/svg%3E">
@@ -12,7 +12,7 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Shengyu Li — Systems, AI & Risk">
-<meta property="og:description" content="Linux kernel contributor · MSU system programming · building multi-agent LLM & risk-aware quant tooling.">
+<meta property="og:description" content="Linux kernel contributor · MSU system programming · systems programming and independent AI & risk projects.">
 <meta property="og:url" content="https://kcnyu.github.io/">
 <meta property="og:image" content="https://kcnyu.github.io/avatar.jpg">
 <meta name="twitter:card" content="summary">
@@ -179,6 +179,8 @@ section > .wrap > h2{
 .callout code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);padding:.08em .38em;border-radius:6px;border:1px solid var(--line)}
 .callout a.inl{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
 .callout a.inl:hover{border-color:var(--accent)}
+.card a.inl{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
+.card a.inl:hover{border-color:var(--accent)}
 
 /* projects */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -250,7 +252,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
   <div class="wrap">
     <a class="brand" href="#top"><span class="dot"></span>shengyu.li</a>
     <div class="nav-links">
-      <a href="#work" class="hide-sm">work</a>
+      <a href="#projects" class="hide-sm">projects</a>
       <a href="#path" class="hide-sm">path</a>
       <a href="https://github.com/KCNyu" target="_blank" rel="noopener">github</a>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
@@ -267,9 +269,9 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
       <p class="kicker">Systems · AI · Risk</p>
       <h1>Shengyu Li<span class="cn">李圣禹</span></h1>
       <p class="role">
-        Kernel-level systems engineer turned <b>AI &amp; risk-control builder</b>.
-        MSU system-programming grad — now shipping multi-agent LLM systems and
-        risk-aware quant tooling that grades its own decisions.
+        Systems programmer with a background in backend engineering and kernel work.
+        Interested in <b>AI infrastructure and risk-aware software</b> that makes
+        complex decisions easier to inspect.
       </p>
       <p class="quote">"Everything real turns fake, everything right is wrong."</p>
       <div class="cta">
@@ -323,28 +325,27 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
   </div>
 </section>
 
-<section id="work">
+<section id="projects">
   <div class="wrap">
-    <p class="kicker">Selected work</p>
-    <h2>Things I&#39;ve built</h2>
-    <p class="sub">From SQLite-from-scratch to autonomous LLM traders. Full list on GitHub.</p>
+    <p class="kicker">Projects &amp; open source</p>
+    <h2>Things I&#39;ve built and contributed to</h2>
+    <p class="sub">Independent projects, plus selected contributions to the systems and AI ecosystem.</p>
     <div class="grid">
 
-      <a class="card feature" href="https://github.com/KCNyu/clawock" target="_blank" rel="noopener">
+      <a class="card" href="https://github.com/KCNyu/clawock" target="_blank" rel="noopener">
         <div class="top">
-          <h3>clawock <span class="tag">flagship · live</span></h3>
+          <h3>clawock <span class="tag">personal project</span></h3>
           <span class="lang"><span class="swatch" style="background:#3572A5"></span>Python</span>
         </div>
         <p>
-          A fully autonomous, multi-agent LLM system that runs a bull-vs-bear debate over a
-          real HK + US stock portfolio every morning, enforces hard risk gates, and grades its
-          own calls on a daily scorecard — honestly admitting where it loses to buy-and-hold.
-          Ships a live public dashboard.
+          An independent agent-driven investment desk for a real HK + US portfolio. It runs a
+          bull-vs-bear debate, applies hard risk gates, and grades its own calls on a daily
+          scorecard.
         </p>
         <div class="foot">
           <span class="star">★ <!--S:star:clawock-->14<!--E:star:clawock--></span>
           <span>Multi-agent · Risk gates · Self-audit</span>
-          <span class="go">live dashboard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          <span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
         </div>
       </a>
 
@@ -366,6 +367,15 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
         <div class="foot"><span class="star">★ <!--S:star:Program-MSU-->26<!--E:star:Program-MSU--></span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
       </a>
 
+      <div class="card">
+        <div class="top">
+          <h3><a class="inl" href="https://github.com/Arize-ai/openinference/pull/3591" target="_blank" rel="noopener">OpenInference</a> <span class="tag">contribution</span></h3>
+          <span class="lang"><span class="swatch" style="background:#3572A5"></span>Python</span>
+        </div>
+        <p>Optimized Google ADK streaming instrumentation by deriving request attributes once per streamed span instead of once per chunk.</p>
+        <div class="foot"><span>Tracing · Google ADK</span><span class="go">merged upstream</span></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -374,24 +384,19 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
   <div class="wrap">
     <p class="kicker">Trajectory</p>
     <h2>Where I&#39;ve been</h2>
-    <p class="sub">Systems &amp; compilers foundation → product-minded AI and risk work.</p>
+    <p class="sub">A systems and compilers foundation, with independent projects in AI and risk-aware software.</p>
     <div class="paths">
       <div class="path">
         <h3>Experience</h3>
         <div class="tl">
-          <div class="item now">
-            <div class="yr">2024 — now</div>
-            <div class="ti">AI &amp; Risk-Control · builder</div>
-            <div class="de">Multi-agent LLM systems and risk-aware quant tooling; product thinking around trust, guardrails and honest evaluation.</div>
-          </div>
           <div class="item">
             <div class="yr">2021 — 2023</div>
-            <div class="ti">Backend Developer</div>
+            <div class="ti">Backend Developer · Chatroulette</div>
             <div class="de">Real-time backend services at scale.</div>
           </div>
           <div class="item">
             <div class="yr">2021</div>
-            <div class="ti">Software Engineering Intern</div>
+            <div class="ti">Software Engineering Intern · Tencent</div>
             <div class="de">Backend development and systems work.</div>
           </div>
         </div>
@@ -432,7 +437,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
         LinkedIn
       </a>
       <a href="https://www.zhihu.com/people/shengyuli" target="_blank" rel="noopener">知乎</a>
-      <a href="https://kcnyu.github.io/clawock/" target="_blank" rel="noopener">clawock ↗</a>
+      <a href="https://kcnyu.github.io/clawock/" target="_blank" rel="noopener">clawock · personal project ↗</a>
       <a href="mailto:shengyu.li.evgeny@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         Email
