@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shengyu Li — Systems, AI & Risk</title>
-<meta name="description" content="Shengyu Li (KCNyu) — Linux kernel contributor and MSU system-programming grad, with a background in systems programming and independent AI and risk projects.">
+<title>Shengyu Li — Payments, Risk & AI</title>
+<meta name="description" content="Shengyu Li (KCNyu) — payments, risk and AI systems, with a background in systems programming. Linux kernel and OpenInference contributor.">
 <meta name="author" content="Shengyu Li">
 <link rel="canonical" href="https://kcnyu.github.io/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%A7%3C/text%3E%3C/svg%3E">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Shengyu Li — Systems, AI & Risk">
-<meta property="og:description" content="Linux kernel contributor · MSU system programming · systems programming and independent AI & risk projects.">
+<meta property="og:title" content="Shengyu Li — Payments, Risk & AI">
+<meta property="og:description" content="Payments, risk and AI systems · background in systems programming · Linux kernel and OpenInference contributor.">
 <meta property="og:url" content="https://kcnyu.github.io/">
 <meta property="og:image" content="https://kcnyu.github.io/avatar.jpg">
 <meta name="twitter:card" content="summary">
@@ -93,7 +93,6 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:5
 }
 .theme-btn:hover{color:var(--ink);border-color:var(--line-strong)}
 .theme-btn svg{width:16px;height:16px}
-.nav-links a.hide-sm{}
 @media (max-width:600px){.nav-links a.hide-sm{display:none}}
 
 /* ---- hero ---- */
@@ -116,15 +115,6 @@ header.hero{padding:64px 0 40px}
   border:1px solid var(--line-strong);
   box-shadow:0 24px 60px -24px rgba(0,0,0,.6), 0 0 0 1px var(--line);
 }
-.avatar-badge{
-  position:absolute;left:-12px;bottom:-12px;
-  background:var(--surface);border:1px solid var(--line);border-radius:12px;
-  font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);
-  padding:.38rem .55rem;display:flex;align-items:center;gap:.4rem;
-  box-shadow:0 10px 26px -14px rgba(0,0,0,.5);
-}
-.avatar-badge b{color:var(--ink)}
-.avatar-badge .pulse{width:7px;height:7px;border-radius:50%;background:#3fb950;box-shadow:0 0 0 3px rgba(63,185,80,.22)}
 
 .cta{display:flex;flex-wrap:wrap;gap:10px}
 .btn{
@@ -143,20 +133,20 @@ header.hero{padding:64px 0 40px}
   .hero-grid{grid-template-columns:1fr;gap:26px}
   .avatar-wrap{order:-1}
   .avatar{width:104px;height:104px;border-radius:18px}
-  .avatar-badge{font-size:.64rem}
 }
 
 /* ---- stat strip ---- */
 .stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
   background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
-  overflow:hidden;margin:8px 0 4px;
+  overflow:hidden;
 }
-.stat{background:var(--surface);padding:16px 18px}
+.stat{background:var(--surface);padding:16px 18px;display:block;transition:background .15s}
+a.stat:hover{background:var(--surface-2)}
 .stat .n{font-family:var(--mono);font-size:1.35rem;font-weight:600;letter-spacing:-.01em}
 .stat .n .u{color:var(--accent);font-size:.8em}
 .stat .l{font-size:.74rem;color:var(--muted);margin-top:2px;letter-spacing:.02em}
-@media (max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.stat{padding:14px 10px}.stat .n{font-size:1.15rem}.stat .l{font-size:.7rem;white-space:nowrap}}
 
 /* ---- sections ---- */
 section{padding:46px 0}
@@ -165,25 +155,11 @@ section > .wrap > h2{
 }
 .sub{color:var(--muted);font-size:.94rem;margin:0 0 26px}
 
-/* highlight callout */
-.callout{
-  display:flex;gap:16px;align-items:flex-start;
-  background:linear-gradient(180deg,var(--surface-2),var(--surface));
-  border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;
-  position:relative;overflow:hidden;
-}
-.callout::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber)}
-.callout .ico{font-size:1.7rem;line-height:1;flex:0 0 auto;margin-top:2px}
-.callout h3{margin:0 0 .3rem;font-size:1.02rem}
-.callout p{margin:0;color:var(--ink-soft);font-size:.92rem}
-.callout code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);padding:.08em .38em;border-radius:6px;border:1px solid var(--line)}
-.callout a.inl{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
-.callout a.inl:hover{border-color:var(--accent)}
-.card a.inl{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
-.card a.inl:hover{border-color:var(--accent)}
 
 /* projects */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:860px){.grid.three{grid-template-columns:1fr}}
 @media (max-width:680px){.grid{grid-template-columns:1fr}}
 .card{
   display:flex;flex-direction:column;
@@ -192,19 +168,22 @@ section > .wrap > h2{
   position:relative;min-height:100%;
 }
 .card:hover{transform:translateY(-3px);border-color:var(--line-strong);background:var(--surface-2)}
-.card.feature{grid-column:1 / -1;border-color:var(--line-strong)}
-.card.feature::after{
-  content:"";position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;
-  box-shadow:inset 0 0 0 1px var(--accent-soft);
-}
 .card .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:.6rem}
+.card h3 a::after{content:"";position:absolute;inset:0;border-radius:var(--radius)}
+.card .foot a{position:relative;z-index:1}
+.card .foot a:hover{text-decoration:underline;text-underline-offset:3px}
 .card h3{margin:0;font-size:1.05rem;font-family:var(--mono);font-weight:600;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .card .lang{font-family:var(--mono);font-size:.7rem;color:var(--muted);display:inline-flex;align-items:center;gap:.35rem}
 .card .lang .swatch{width:9px;height:9px;border-radius:50%}
 .card p{margin:0 0 .9rem;color:var(--ink-soft);font-size:.92rem;flex:1}
 .card .foot{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:.76rem;color:var(--muted)}
 .card .foot .star{color:var(--amber)}
-.card .foot .go{margin-left:auto;color:var(--accent);display:inline-flex;align-items:center;gap:.3rem}
+.card .foot .links{margin-left:auto;display:flex;gap:14px}
+.card .foot > .go{margin-left:auto}
+.card code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);padding:.08em .38em;border-radius:6px;border:1px solid var(--line)}
+a.inl{color:var(--accent);border-bottom:1px solid var(--accent-soft)}
+a.inl:hover{border-color:var(--accent)}
+.card .foot .go{color:var(--accent);display:inline-flex;align-items:center;gap:.3rem}
 .card .foot .go svg{width:13px;height:13px}
 .tag{
   font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
@@ -213,7 +192,7 @@ section > .wrap > h2{
 
 /* two-col path */
 .paths{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-@media (max-width:680px){.paths{grid-template-columns:1fr;gap:8px}}
+@media (max-width:680px){.paths{grid-template-columns:1fr;gap:30px}}
 .path h3{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
 .tl{position:relative;padding-left:22px}
 .tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line)}
@@ -252,8 +231,9 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
   <div class="wrap">
     <a class="brand" href="#top"><span class="dot"></span>shengyu.li</a>
     <div class="nav-links">
+      <a href="#open-source" class="hide-sm">open source</a>
       <a href="#projects" class="hide-sm">projects</a>
-      <a href="#path" class="hide-sm">path</a>
+      <a href="#background" class="hide-sm">background</a>
       <a href="https://github.com/KCNyu" target="_blank" rel="noopener">github</a>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
         <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
@@ -266,12 +246,12 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="kicker">Systems · AI · Risk</p>
+      <p class="kicker">Payments · Risk · AI</p>
       <h1>Shengyu Li<span class="cn">李圣禹</span></h1>
       <p class="role">
-        Systems programmer with a background in backend engineering and kernel work.
-        Interested in <b>AI infrastructure and risk-aware software</b> that makes
-        complex decisions easier to inspect.
+        I focus on <b>payments, risk and AI systems</b>: software that makes
+        high-stakes decisions observable and auditable. My background is in
+        systems programming.
       </p>
       <p class="quote">"Everything real turns fake, everything right is wrong."</p>
       <div class="cta">
@@ -295,109 +275,106 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
     </div>
     <div class="avatar-wrap">
       <img class="avatar" src="avatar.jpg" width="158" height="158" alt="Shengyu Li">
-      <span class="avatar-badge"><span class="pulse"></span>based in <b>Moscow ↔ CN</b></span>
     </div>
   </div>
 </header>
 
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><div class="n">6.9</div><div class="l">Linux kernel merged</div></div>
-    <div class="stat"><div class="n"><!--S:stars-->186<!--E:stars--><span class="u">★</span></div><div class="l">GitHub stars</div></div>
-    <div class="stat"><div class="n"><!--S:zhihu-->2.0<!--E:zhihu--><span class="u">k</span></div><div class="l">知乎 followers</div></div>
-    <div class="stat"><div class="n">MSU</div><div class="l">M.S. System Prog.</div></div>
+    <a class="stat" href="https://github.com/KCNyu?tab=repositories&amp;sort=stargazers" target="_blank" rel="noopener"><div class="n"><!--S:stars-->186<!--E:stars--><span class="u">★</span></div><div class="l">GitHub stars</div></a>
+    <a class="stat" href="https://github.com/KCNyu?tab=followers" target="_blank" rel="noopener"><div class="n"><!--S:followers-->31<!--E:followers--></div><div class="l">GitHub followers</div></a>
+    <a class="stat" href="https://www.zhihu.com/people/shengyuli" target="_blank" rel="noopener"><div class="n"><!--S:zhihu-->2.0<!--E:zhihu--><span class="u">k</span></div><div class="l">知乎 followers</div></a>
   </div>
 </div>
 
-<section id="highlight">
+<section id="open-source">
   <div class="wrap">
-    <div class="callout">
-      <div class="ico">🐧</div>
-      <div>
-        <h3>Linux kernel contributor</h3>
-        <p>
-          Authored a patch merged into the mainline tree <b>(Linux 6.9)</b> that fixes an
-          infinite loop in the <code>selftests/harness</code> <code>FIXTURE_TEARDOWN</code> path —
-          <a class="inl" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=72d7cb5c190befbb095bae7737e71560ec0fcaa6" target="_blank" rel="noopener">torvalds/linux&nbsp;·&nbsp;72d7cb5</a>.
-        </p>
+    <p class="kicker">Open source</p>
+    <h2>Merged upstream</h2>
+    <p class="sub">Fixes that landed in projects other people maintain.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="top">
+          <h3><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=72d7cb5c190befbb095bae7737e71560ec0fcaa6" target="_blank" rel="noopener">Linux kernel</a> <span class="tag">Linux 6.9</span></h3>
+          <span class="lang"><span class="swatch" style="background:#555555"></span>C</span>
+        </div>
+        <p>Fixed an infinite loop in the kselftest harness: an assertion failing inside <code>FIXTURE_TEARDOWN</code> re-entered teardown forever instead of failing the test.</p>
+        <div class="foot"><span>selftests/harness</span><span class="go">commit 72d7cb5 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
       </div>
+
+      <div class="card">
+        <div class="top">
+          <h3><a href="https://github.com/Arize-ai/openinference/pull/3591" target="_blank" rel="noopener">OpenInference</a> <span class="tag">2026</span></h3>
+          <span class="lang"><span class="swatch" style="background:#3572A5"></span>Python</span>
+        </div>
+        <p>Google ADK instrumentation now derives request attributes once per span instead of re-serializing the whole request on every streamed chunk.</p>
+        <div class="foot"><span>Tracing · Google ADK</span><span class="go">PR #3591 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <section id="projects">
   <div class="wrap">
-    <p class="kicker">Projects &amp; open source</p>
-    <h2>Things I&#39;ve built and contributed to</h2>
-    <p class="sub">Independent projects, plus selected contributions to the systems and AI ecosystem.</p>
-    <div class="grid">
-
-      <a class="card" href="https://github.com/KCNyu/clawock" target="_blank" rel="noopener">
-        <div class="top">
-          <h3>clawock <span class="tag">personal project</span></h3>
-          <span class="lang"><span class="swatch" style="background:#3572A5"></span>Python</span>
-        </div>
-        <p>
-          An independent agent-driven investment desk for a real HK + US portfolio. It runs a
-          bull-vs-bear debate, applies hard risk gates, and grades its own calls on a daily
-          scorecard.
-        </p>
-        <div class="foot">
-          <span class="star">★ <!--S:star:clawock-->14<!--E:star:clawock--></span>
-          <span>Multi-agent · Risk gates · Self-audit</span>
-          <span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-        </div>
-      </a>
-
-      <a class="card" href="https://github.com/KCNyu/db_tutorial_cpp" target="_blank" rel="noopener">
-        <div class="top">
-          <h3>db_tutorial_cpp</h3>
-          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
-        </div>
-        <p>Writing a SQLite clone from scratch in C++ — B-tree pager, cursor, and REPL. The most-starred thing I&#39;ve shared.</p>
-        <div class="foot"><span class="star">★ <!--S:star:db_tutorial_cpp-->132<!--E:star:db_tutorial_cpp--></span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
-      </a>
-
-      <a class="card" href="https://github.com/KCNyu/Program-MSU" target="_blank" rel="noopener">
-        <div class="top">
-          <h3>Program-MSU</h3>
-          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
-        </div>
-        <p>A course guide for the CS track at MSU-BIT / MSU Department of System Programming — the resource I wish I&#39;d had as a freshman.</p>
-        <div class="foot"><span class="star">★ <!--S:star:Program-MSU-->26<!--E:star:Program-MSU--></span><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
-      </a>
+    <p class="kicker">Projects</p>
+    <h2>Things I&#39;ve built</h2>
+    <p class="sub">Personal projects, built in my own time. More on <a class="inl" href="https://github.com/KCNyu" target="_blank" rel="noopener">GitHub</a>.</p>
+    <div class="grid three">
 
       <div class="card">
         <div class="top">
-          <h3><a class="inl" href="https://github.com/Arize-ai/openinference/pull/3591" target="_blank" rel="noopener">OpenInference</a> <span class="tag">contribution</span></h3>
+          <h3><a href="https://github.com/KCNyu/clawock" target="_blank" rel="noopener">clawock</a></h3>
           <span class="lang"><span class="swatch" style="background:#3572A5"></span>Python</span>
         </div>
-        <p>Optimized Google ADK streaming instrumentation by deriving request attributes once per streamed span instead of once per chunk.</p>
-        <div class="foot"><span>Tracing · Google ADK</span><span class="go">merged upstream</span></div>
+        <p>An agent-driven investment desk for a real HK + US portfolio. It runs a bull-vs-bear debate, applies hard risk gates, and grades its own calls on a daily scorecard.</p>
+        <div class="foot">
+          <span class="star">★ <!--S:star:clawock-->14<!--E:star:clawock--></span>
+          <span class="links"><a class="go" href="https://kcnyu.github.io/clawock/" target="_blank" rel="noopener">dashboard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="top">
+          <h3><a href="https://github.com/KCNyu/db_tutorial_cpp" target="_blank" rel="noopener">db_tutorial_cpp</a></h3>
+          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
+        </div>
+        <p>A SQLite clone written from scratch in C++: pager, B-tree, cursor and REPL. The most-starred thing I&#39;ve shared.</p>
+        <div class="foot"><span class="star">★ <!--S:star:db_tutorial_cpp-->132<!--E:star:db_tutorial_cpp--></span><span class="links"><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></span></div>
+      </div>
+
+      <div class="card">
+        <div class="top">
+          <h3><a href="https://github.com/KCNyu/Program-MSU" target="_blank" rel="noopener">Program-MSU</a></h3>
+          <span class="lang"><span class="swatch" style="background:#f34b7d"></span>C++</span>
+        </div>
+        <p>A course guide for the CS track at MSU-BIT and the MSU Department of System Programming. The resource I wish I&#39;d had as a freshman.</p>
+        <div class="foot"><span class="star">★ <!--S:star:Program-MSU-->26<!--E:star:Program-MSU--></span><span class="links"><span class="go">repo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></span></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<section id="path">
+<section id="background">
   <div class="wrap">
-    <p class="kicker">Trajectory</p>
-    <h2>Where I&#39;ve been</h2>
-    <p class="sub">A systems and compilers foundation, with independent projects in AI and risk-aware software.</p>
+    <p class="kicker">Background</p>
+    <h2>Education and earlier work</h2>
+    <p class="sub">Mathematics and system programming at Moscow State University, with engineering work alongside.</p>
     <div class="paths">
       <div class="path">
-        <h3>Experience</h3>
+        <h3>Earlier work</h3>
         <div class="tl">
           <div class="item">
             <div class="yr">2021 — 2023</div>
-            <div class="ti">Backend Developer · Chatroulette</div>
-            <div class="de">Real-time backend services at scale.</div>
+            <div class="ti">Software Engineer · Chatroulette</div>
+            <div class="de">Data instrumentation and telemetry dashboards (Prometheus, Grafana).</div>
           </div>
           <div class="item">
             <div class="yr">2021</div>
             <div class="ti">Software Engineering Intern · Tencent</div>
-            <div class="de">Backend development and systems work.</div>
+            <div class="de">Payment-channel integration on the billing platform.</div>
           </div>
         </div>
       </div>
@@ -437,7 +414,6 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
         LinkedIn
       </a>
       <a href="https://www.zhihu.com/people/shengyuli" target="_blank" rel="noopener">知乎</a>
-      <a href="https://kcnyu.github.io/clawock/" target="_blank" rel="noopener">clawock · personal project ↗</a>
       <a href="mailto:shengyu.li.evgeny@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         Email

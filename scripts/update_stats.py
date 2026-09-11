@@ -5,6 +5,7 @@ Numbers on a static page go stale silently, so every one of them lives between
 a pair of marker comments and is rewritten from an authoritative source here:
 
     <!--S:stars-->180<!--E:stars-->              total stars over own non-fork repos
+    <!--S:followers-->31<!--E:followers-->        GitHub followers of the account
     <!--S:star:clawock-->7<!--E:star:clawock-->  stars of one repo
     <!--S:zhihu-->2.0<!--E:zhihu-->              知乎 follower count, in thousands
 
@@ -86,6 +87,15 @@ def fetch_repos() -> dict[str, int]:
         page += 1
 
 
+def fetch_followers() -> int:
+    user = api(f"/users/{OWNER}")
+    if not isinstance(user, dict) or not isinstance(user.get("followers"), int):
+        die("unexpected user payload: no followers count")
+    if user["followers"] <= 0:
+        die(f"implausible follower count: {user['followers']}")
+    return user["followers"]
+
+
 def fetch_zhihu_thousands() -> str:
     req = urllib.request.Request(ZHIHU_SOURCE, headers={"User-Agent": f"{OWNER}-homepage-stats"})
     try:
@@ -107,9 +117,11 @@ def fetch_zhihu_thousands() -> str:
     return f"{count / 1000:.1f}"
 
 
-def resolve(key: str, stars: dict[str, int], zhihu: str) -> str:
+def resolve(key: str, stars: dict[str, int], followers: int, zhihu: str) -> str:
     if key == "stars":
         return str(sum(stars.values()))
+    if key == "followers":
+        return str(followers)
     if key == "zhihu":
         return zhihu
     if key.startswith("star:"):
@@ -127,6 +139,7 @@ def main() -> int:
     total = sum(stars.values())
     if total < MIN_TOTAL_STARS:
         die(f"total stars came back as {total}, expected at least {MIN_TOTAL_STARS}")
+    followers = fetch_followers()
     zhihu = fetch_zhihu_thousands()
 
     page = PAGE.read_text(encoding="utf-8")
@@ -138,7 +151,7 @@ def main() -> int:
     def replace(match: re.Match[str]) -> str:
         nonlocal changed
         key, old = match.group(1), match.group(2)
-        new = resolve(key, stars, zhihu)
+        new = resolve(key, stars, followers, zhihu)
         if new != old:
             print(f"  {key}: {old} -> {new}")
             changed += 1
